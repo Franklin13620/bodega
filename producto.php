@@ -49,8 +49,6 @@
 	if (isset($_POST['reference_remove']) and isset($_POST['quantity_remove'])){
 		// Validad stock inventario
 		if ($row['stock']<=0) {
-		// echo'<script type="text/javascript">
-		// alert("El Inventario esta a cero");</script>';
 		$errorInventario = 1;
 		}else{
 		$tipo='1';

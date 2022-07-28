@@ -89,6 +89,7 @@
 					<th>Usuario</th>
 					<th>Email</th>
 					<th>Agregado</th>
+					<th>Tipo</th>
 					<th><span class="pull-right">Acciones</span></th>
 					
 				</tr>
@@ -99,6 +100,7 @@
 						$user_name=$row['user_name'];
 						$user_email=$row['user_email'];
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
+						$tipo_usuario = $row['tipo_usuario'];
 						
 					?>
 					
@@ -106,6 +108,7 @@
 					<input type="hidden" value="<?php echo $row['lastname'];?>" id="apellidos<?php echo $user_id;?>">
 					<input type="hidden" value="<?php echo $user_name;?>" id="usuario<?php echo $user_id;?>">
 					<input type="hidden" value="<?php echo $user_email;?>" id="email<?php echo $user_id;?>">
+					
 				
 					<tr>
 						<td><?php echo $user_id; ?></td>
@@ -113,6 +116,7 @@
 						<td ><?php echo $user_name; ?></td>
 						<td ><?php echo $user_email; ?></td>
 						<td><?php echo $date_added;?></td>
+						<td><?php if($tipo_usuario == 2) {echo Administrado; }else{echo Personal;};?></td>
 						
 					<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
