@@ -49,9 +49,9 @@
 	                        <label for="tipo_usuario2" class="col-sm-3 control-label">Tipo de usuario</label>
 	                        <div class="col-sm-8">
 	                            <select class="form-control" name="tipo_usuario2" id="tipo_usuario2" required>
-	                                <option value>Seleccionar</option>
-	                                <option value="1">Personal</option>
-	                                <option value="2">Administrador</option>
+	                                <option value="">Seleccionar</option>
+	                                <option value="2">Personal</option>
+	                                <option value="1">Administrador</option>
 	                            </select>
 	                        </div>
 	                    </div>
