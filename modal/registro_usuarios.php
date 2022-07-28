@@ -49,7 +49,16 @@
 				  <input type="password" class="form-control" id="user_password_repeat" name="user_password_repeat" placeholder="Repite contraseña" pattern=".{6,}" required>
 				</div>
 			  </div>
-			 
+			  <div class="form-group">
+	                        <label for="" class="col-sm-3 control-label">Tipo de usuario</label>
+	                        <div class="col-sm-8">
+	                            <select class="form-control" name="tipo_usuario" id="tipo_usuario" required>
+	                                <option value="" selected>Seleccionar</option>
+	                                <option value="1">Personal</option>
+	                                <option value="2">Administrador</option>
+	                            </select>
+	                        </div>
+	                    </div>
 			  
 
 			 

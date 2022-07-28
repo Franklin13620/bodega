@@ -31,7 +31,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
         } elseif (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
-        } elseif (
+        } elseif (empty($_POST['tipo_usuario'])){
+            $errors[] = "Tipo de usuario vacio";
+        }elseif (
 			!empty($_POST['user_name'])
 			&& !empty($_POST['firstname'])
 			&& !empty($_POST['lastname'])
@@ -41,6 +43,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && !empty($_POST['user_email'])
             && strlen($_POST['user_email']) <= 64
             && filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)
+            && !empty($_POST['tipo_usuario'])
             && !empty($_POST['user_password_new'])
             && !empty($_POST['user_password_repeat'])
             && ($_POST['user_password_new'] === $_POST['user_password_repeat'])
@@ -55,6 +58,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $user_email = mysqli_real_escape_string($con,(strip_tags($_POST["user_email"],ENT_QUOTES)));
 				$user_password = $_POST['user_password_new'];
 				$date_added=date("Y-m-d H:i:s");
+                $tipo_usuario = $_POST['tipo_usuario'];
                 // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
                 // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
                 // PHP 5.3/5.4, by the password hashing compatibility library
@@ -68,8 +72,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                     $errors[] = "Lo sentimos , el nombre de usuario ó la dirección de correo electrónico ya está en uso.";
                 } else {
 					// write new user's data into database
-                    $sql = "INSERT INTO users (firstname, lastname, user_name, user_password_hash, user_email, date_added)
-                            VALUES('".$firstname."','".$lastname."','" . $user_name . "', '" . $user_password_hash . "', '" . $user_email . "','".$date_added."');";
+                    $sql = "INSERT INTO users (firstname, lastname, user_name, user_password_hash, user_email, date_added, tipo_usuario)
+                            VALUES('".$firstname."','".$lastname."','" . $user_name . "', '" . $user_password_hash . "', '" . $user_email . "','".$date_added."','" .$tipo_usuario."');";
                     $query_new_user_insert = mysqli_query($con,$sql);
 
                     // if user has been added successfully
