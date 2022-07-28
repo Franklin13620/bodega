@@ -24,7 +24,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
         } elseif (!filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
-        } elseif (
+        } elseif (empty($_POST['tipo_usuario2'])){
+			$errors[]= "Tipo de usuario esta vacio";
+		}elseif (
 			!empty($_POST['user_name2'])
 			&& !empty($_POST['firstname2'])
 			&& !empty($_POST['lastname2'])
@@ -34,6 +36,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && !empty($_POST['user_email2'])
             && strlen($_POST['user_email2']) <= 64
             && filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)
+			&& !empty($_POST['tipo_usuario2'])
           )
          {
             require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -46,10 +49,10 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 $user_email = mysqli_real_escape_string($con,(strip_tags($_POST["user_email2"],ENT_QUOTES)));
 				
 				$user_id=intval($_POST['mod_id']);
-					
+				$tipo_usuario = $_POST['tipo_usuario2'];
                
 					// write new user's data into database
-                    $sql = "UPDATE users SET firstname='".$firstname."', lastname='".$lastname."', user_name='".$user_name."', user_email='".$user_email."'
+                    $sql = "UPDATE users SET firstname='".$firstname."', lastname='".$lastname."', user_name='".$user_name."', user_email='".$user_email."', tipo_usuario='".$tipo_usuario."'
                             WHERE user_id='".$user_id."';";
                     $query_update = mysqli_query($con,$sql);
 
