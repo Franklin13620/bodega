@@ -45,17 +45,16 @@
 	                        </div>
 	                    </div>
 
-	                    <div class="form-group">
-	                        <label for="tipo_usuario2" class="col-sm-3 control-label">Tipo de usuario</label>
+						<div class="form-group">
+	                        <label for="tipo_usuario2" class="col-sm-3 control-label">Tipo</label>
 	                        <div class="col-sm-8">
-	                            <select class="form-control" name="tipo_usuario2" id="tipo_usuario2" required>
-	                                <option value="">Seleccionar</option>
-	                                <option value="2">Personal</option>
-	                                <option value="1">Administrador</option>
-	                            </select>
+	                            <select class="form-control" name="tipo_usuario2" id="tipo_usuario2">
+									<option value selected>Seleccionar</option>
+									<option value="Personal">Personal</option>
+									<option value="Admin">Admin</option>
+								</select>
 	                        </div>
 	                    </div>
-
 
 	            </div>
 	            <div class="modal-footer">

@@ -102,7 +102,7 @@ $( "#guardar_usuario" ).submit(function( event ) {
 })
 
 $( "#editar_usuario" ).submit(function( event ) {
-  $('#actualizar_datos2').attr("disabled", true);
+  $("#actualizar_datos2").attr("disabled", true);
   
  var parametros = $(this).serialize();
 	 $.ajax({
@@ -149,14 +149,14 @@ $( "#editar_password" ).submit(function( event ) {
 			var apellidos = $("#apellidos"+id).val();
 			var usuario = $("#usuario"+id).val();
 			var email = $("#email"+id).val();
-			var tipo_usuario = $("#tipo_usuario"+id).val();
+			var tipo = $("#tipo_usuario"+id).val();
 			
 			$("#mod_id").val(id);
 			$("#firstname2").val(nombres);
 			$("#lastname2").val(apellidos);
 			$("#user_name2").val(usuario);
 			$("#user_email2").val(email);
-			$("#tipo_usuario").val(tipo_usuario);
+			$("#tipo_usuario2").val(tipo);
 			
 		}
 </script>

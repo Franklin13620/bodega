@@ -54,8 +54,8 @@
 	                        <div class="col-sm-8">
 	                            <select class="form-control" name="tipo_usuario" id="tipo_usuario" required>
 	                                <option value="" selected>Seleccionar</option>
-	                                <option value="2">Personal</option>
-	                                <option value="1">Administrador</option>
+	                                <option value="Personal">Personal</option>
+	                                <option value="Admin">Administrador</option>
 	                            </select>
 	                        </div>
 	                    </div>

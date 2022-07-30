@@ -48,7 +48,7 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		 $aColumns = array('firstname', 'lastname');//Columnas de busqueda
+		 $aColumns = array('firstname', 'lastname', 'tipo_usuario', 'user_email');//Columnas de busqueda
 		 $sTable = "users";
 		 $sWhere = "";
 		if ( $_GET['q'] != "" )
@@ -108,7 +108,7 @@
 					<input type="hidden" value="<?php echo $row['lastname'];?>" id="apellidos<?php echo $user_id;?>">
 					<input type="hidden" value="<?php echo $user_name;?>" id="usuario<?php echo $user_id;?>">
 					<input type="hidden" value="<?php echo $user_email;?>" id="email<?php echo $user_id;?>">
-					<input type="" value="<?php echo $row['tipo_usuario'];?>" id="tipo_usuario<?php echo $user_id;?>">
+					<input type="hidden" value="<?php echo $tipo_usuario;?>" id="tipo_usuario<?php echo $user_id;?>">
 					
 				
 					<tr>
@@ -117,7 +117,8 @@
 						<td ><?php echo $user_name; ?></td>
 						<td ><?php echo $user_email; ?></td>
 						<td><?php echo $date_added;?></td>
-						<td style="text-align: center;"><?php if($tipo_usuario == "1") {echo "Administrado"; }else{echo "Personal";} echo " ".$tipo_usuario;?></td>
+
+						<td><?php if($tipo_usuario == "Admin") {echo $tipo_usuario; }elseif ($tipo_usuario == "Personal"){echo $tipo_usuario;}else{echo "Desconocido";}?></td>	
 
 					<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
