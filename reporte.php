@@ -37,7 +37,7 @@
 					</div>
 					<div class='col-md-4'>
 						<label>Hasta</label>
-						<input type="date" class="form-control" name="hasta" required>
+						<input type="date" class="form-control" name="hasta" value=<?php echo date("Y-m-d"); ?> required>
 					</div>
 					<!-- Busqueda categoria esta 100% -->
 					<div class='col-md-4'>
