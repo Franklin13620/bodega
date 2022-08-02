@@ -121,7 +121,7 @@ $( "#guardar_producto" ).submit(function( event ) {
   $('#guardar_datos').attr("disabled", true);
   
 
- var parametros = $(this).serialize();
+//  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
 			url: "ajax/nuevo_producto.php",
