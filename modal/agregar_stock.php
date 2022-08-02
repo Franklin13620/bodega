@@ -20,7 +20,7 @@
           <div class="form-group">
             <label for="reference" class="col-sm-2 control-label">Codigo</label>
             <div class="col-sm-6">
-              <input type="text" name="reference" class="form-control" id="reference" value="<?php echo $row['codigo_producto'];?>" placeholder="Referencia">
+              <input type="text" name="reference" class="form-control" id="reference" value="<?php echo $row['codigo_producto'];?>" placeholder="Referencia" >
             </div>
           </div>
           

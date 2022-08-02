@@ -11,11 +11,15 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 			$errors[] = "Stock del producto vacío";
 		} else if (empty($_POST['precio'])){
 			$errors[] = "Precio de venta vacío";
+		// } else if (empty($_FILES['file'])){
+		//  	$errors[] = "La imagen esta vacia";
+			
 		} else if (
 			!empty($_POST['codigo']) &&
 			!empty($_POST['nombre']) &&
 			$_POST['stock']!="" &&
 			!empty($_POST['precio'])
+			// && !empty($_FILES['file'])
 		){
 		/* Connect To Database*/
 		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -27,12 +31,23 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$stock=intval($_POST['stock']);
 		$id_categoria=intval($_POST['categoria']);
 		$precio_venta=floatval($_POST['precio']);
+		
+
+			$nombre_imagen = basename($_FILES['file']['name']); //nombre
+			$nombre_imagen_final = date("d-m-y"). "-". date("H-i-s")."-". $nombre_imagen;
+			$file_imagen = $_FILES['file']['tmp_name']; //el archivo
+			$ruta_destino = "../img/productos";
+			$ruta_imagen = "/". $nombre_imagen_final;
+
+
+		$subir_archivo = move_uploaded_file ($file_imagen, $ruta_destino .$ruta_imagen);
+	
 		$date_added=date("Y-m-d H:i:s");
 		$entrada_producto = $stock;
-		$salida_producto = null;
+		$salida_producto = 0;
 		
-		$sql="INSERT INTO products (codigo_producto, nombre_producto, date_added, precio_producto, stock, id_categoria, entrada_producto, salida_producto) 
-		VALUES ('$codigo','$nombre','$date_added','$precio_venta', '$stock','$id_categoria', '$entrada_producto','$salida_producto')";
+		$sql="INSERT INTO products (codigo_producto, nombre_producto, date_added, precio_producto, stock, id_categoria, entrada_producto, salida_producto, imagen_producto) 
+		VALUES ('$codigo','$nombre','$date_added','$precio_venta', '$stock','$id_categoria', '$entrada_producto','$salida_producto', '$ruta_imagen')";
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
 				$messages[] = "Producto ha sido ingresado satisfactoriamente.";
@@ -40,8 +55,7 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 				$user_id=$_SESSION['user_id'];
 				$firstname=$_SESSION['firstname'];
 				$nota="$firstname agrego $stock producto(s) al inventario";
-				$tipo = '0';
-
+				$tipo = 0;
 
 				guardar_historial($id_producto,$user_id,$date_added,$nota,$codigo,$stock,$tipo);
 				

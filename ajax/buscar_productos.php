@@ -1,10 +1,4 @@
 <?php
-
-	/*-------------------------
-	Autor: Obed Alvarado
-	Web: obedalvarado.pw
-	Mail: info@obedalvarado.pw
-	---------------------------*/
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -30,10 +24,6 @@
 			<?php
 			
 		}
-			
-		 
-		
-		
 		
 	}
 	if($action == 'ajax'){
@@ -89,7 +79,16 @@
 						  <a class="thumbnail" href="producto.php?id=<?php echo $id_producto;?>">
 							  <span title="Current quantity" class="badge badge-default stock-counter ng-binding"><?php echo number_format($stock,2); ?></span>
 							  <span title="Low stock" class="low-stock-alert ng-hide" ng-show="item.current_quantity <= item.low_stock_threshold"><i class="fa fa-exclamation-triangle"></i></span>
-							  <img class="img-responsive" src="img/stock.png" alt="<?php echo $nombre_producto;?>">
+							  <img class="item-img img-responsive" src="<?php
+							  $path =  '../img/productos'.$row['imagen_producto']; 
+						if(file_exists($path)){
+						echo "img/productos". $row['imagen_producto'];
+						}else{
+						echo "img/stock.png";
+						}
+
+									?>"
+							   alt="<?php echo $nombre_producto;?>">
 						  </a>
 						  <span class="thumb-name"><strong><?php echo $nombre_producto;?></strong></span>
 						  <span class="thumb-code ng-binding"><?php echo $codigo_producto;?></span>

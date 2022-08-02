@@ -26,17 +26,17 @@
 	}
 	
 	if (isset($_POST['reference']) and isset($_POST['quantity'])){
-		$tipo='0';
+		$tipo=0;
 		$quantity=intval($_POST['quantity']);
 		$entrada_producto=$quantity;
-		$salida_producto= '0';
+		$salida_producto= 0;
 		$reference=mysqli_real_escape_string($con,(strip_tags($_POST["reference"],ENT_QUOTES)));
 		$id_producto=intval($_GET['id']);
 		$user_id=$_SESSION['user_id'];
 		$firstname=$_SESSION['firstname'];
 		$nota="$firstname agrego $quantity producto(s) al inventario";
 		$fecha=date("Y-m-d H:i:s"); // Segundos: H:i:s
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$entrada_producto,$salida_producto);
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo);
 		
 		$update=agregar_stock($id_producto,$quantity);
 		if ($update==1){
@@ -45,15 +45,14 @@
 			$error=1;
 		}
 	}
-	
-	if (isset($_POST['reference_remove']) and isset($_POST['quantity_remove'])){
+	if (isset($_POST['reference_remove']) && isset($_POST['quantity_remove'])){
 		// Validad stock inventario
 		if ($row['stock']<=0) {
 		$errorInventario = 1;
 		}else{
-		$tipo='1';
+		$tipo=1;
 		$quantity=intval($_POST['quantity_remove']);
-		$entrada_producto= '0';
+		$entrada_producto= 0;
 		$salida_producto=$quantity;
 		$reference=mysqli_real_escape_string($con,(strip_tags($_POST["reference_remove"],ENT_QUOTES)));
 		$id_producto=intval($_GET['id']);
@@ -62,7 +61,7 @@
 		$nota="$firstname descargo $quantity producto(s) del inventario";
 		$fecha=date("Y-m-d H:i:s");
 
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$entrada_producto,$salida_producto);
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo);
 		
 		$update=eliminar_stock($id_producto,$quantity);
 		if ($update==1){
@@ -105,10 +104,22 @@ if (isset($_GET['id'])){
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-4 col-sm-offset-2 text-center">
-				 <img class="item-img img-responsive" src="img/stock.png" alt=""> 
+				 
+				 <img class="item-img img-responsive" src="
+				 <?php
+				$path =  'img/productos'.$row['imagen_producto']; 
+				if(file_exists($path)){
+					echo "img/productos". $row['imagen_producto'];
+				}else{
+					echo "img/stock.png";
+				} ?>"
+				 
+				  alt=""> <!--imagen url -->
+
 				  <br>
                     <a href="#" class="btn btn-danger" onclick="eliminar('<?php echo $row['id_producto'];?>')" title="Eliminar"> <i class="glyphicon glyphicon-trash"></i> Eliminar </a> 
 					<a href="#myModal2" data-toggle="modal" data-codigo='<?php echo $row['codigo_producto'];?>' data-nombre='<?php echo $row['nombre_producto'];?>' data-categoria='<?php echo $row['id_categoria']?>' data-precio='<?php echo $row['precio_producto']?>' data-stock='<?php echo $row['stock'];?>' data-id='<?php echo $row['id_producto'];?>' class="btn btn-info" title="Editar"> <i class="glyphicon glyphicon-pencil"></i> Editar </a>	
+	
 					
               </div>
 			  
@@ -203,7 +214,7 @@ if (isset($_GET['id'])){
 								?>
 						<tr>
 							<td><?php echo date('d/m/Y', strtotime($row['fecha']));?></td>
-							<!-- <td><?php //echo date('H:i:s', strtotime($row['fecha']));?></td> -->
+							<!-- <td>//echo date('H:i:s', strtotime($row['fecha']));?></td> -->
 							<td><?php echo $row['nombre_categoria'];?></td>
 							<td><?php echo $row['nota'];?></td>
 							<td><?php echo $row['referencia'];?></td>
@@ -247,11 +258,15 @@ if (isset($_GET['id'])){
 $( "#editar_producto" ).submit(function( event ) {
   $('#actualizar_datos').attr("disabled", true);
   
- var parametros = $(this).serialize();
+var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
 			url: "ajax/editar_producto.php",
-			data: parametros,
+			//data: parametros, //formData
+			data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax2").html("Mensaje: Cargando...");
 			  },
@@ -268,7 +283,7 @@ $( "#editar_producto" ).submit(function( event ) {
   event.preventDefault();
 })
 
-	$('#myModal2').on('show.bs.modal', function (event) {
+$('#myModal2').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal
 		var codigo = button.data('codigo') // Extract info from data-* attributes
 		var nombre = button.data('nombre')

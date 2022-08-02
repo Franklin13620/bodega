@@ -76,11 +76,6 @@
 			</form>
 				
 			
-		
-	
-			
-			
-			
   </div>
 </div>
 		 
@@ -125,11 +120,16 @@ function eliminar (id){
 $( "#guardar_producto" ).submit(function( event ) {
   $('#guardar_datos').attr("disabled", true);
   
+
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
 			url: "ajax/nuevo_producto.php",
-			data: parametros,
+			//date: parametros,
+			data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax_productos").html("Mensaje: Cargando...");
 			  },
