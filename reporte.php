@@ -33,7 +33,7 @@
 				<div class="row">
 					<div class='col-md-4'>
 						<label>Desde</label>
-						<input type="date" class="form-control" name="desde" required>
+						<input type="date" class="form-control" name="desde" value="<?php echo date("Y-m-01"); ?>" required>
 					</div>
 					<div class='col-md-4'>
 						<label>Hasta</label>

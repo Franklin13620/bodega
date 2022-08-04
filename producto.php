@@ -128,8 +128,11 @@ if (isset($_GET['id'])){
                     <div class="col-sm-12">
                       <span class="item-title"> <?php echo $row['nombre_producto'];?></span>
                     </div>
+					<div class="col-sm-12">
+                      <span class="current-stock"> Codigo </span>
+                    </div>
                     <div class="col-sm-12 margin-btm-10">
-                      <span class="item-number"><?php echo $row['codigo_producto'];?></span>
+                      <span class="item-quantity"><?php echo $row['codigo_producto'];?></span>
                     </div>
                     <div class="col-sm-12 margin-btm-10">
                     </div>
