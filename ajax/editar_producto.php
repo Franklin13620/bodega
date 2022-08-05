@@ -28,7 +28,21 @@
 		$stock=intval($_POST['mod_stock']);
 		$precio_venta=floatval($_POST['mod_precio']);
 		$id_producto=$_POST['mod_id'];
-		$sql="UPDATE products SET codigo_producto='".$codigo."', nombre_producto='".$nombre."', id_categoria='".$categoria."', precio_producto='".$precio_venta."', stock='".$stock."' WHERE id_producto='".$id_producto."'";
+
+		if (empty($_FILES['file']['name'])){
+		$sql="UPDATE products SET codigo_producto='".$codigo."', nombre_producto='".$nombre."', id_categoria='".$categoria."', precio_producto='".$precio_venta."', stock='".$stock." ' WHERE id_producto='".$id_producto."'";
+		
+		} elseif (!empty($_FILES['file']['name'])){
+		$nombre_imagen = basename($_FILES['file']['name']); //nombre
+		$nombre_imagen_final = date("d-m-y"). "-". date("H-i-s")."-". $nombre_imagen;
+		$file_imagen = $_FILES['file']['tmp_name']; //el archivo
+		$ruta_destino = "../img/productos";
+		$ruta_imagen = "/". $nombre_imagen_final;
+		$subir_archivo = move_uploaded_file ($file_imagen, $ruta_destino .$ruta_imagen);
+		$sql="UPDATE products SET codigo_producto='".$codigo."', nombre_producto='".$nombre."', id_categoria='".$categoria."', precio_producto='".$precio_venta."', stock='".$stock."', imagen_producto='".$ruta_imagen."' WHERE id_producto='".$id_producto."'";
+		}
+
+
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
 				$messages[] = "Producto ha sido actualizado satisfactoriamente.";
@@ -67,5 +81,6 @@
 				</div>
 				<?php
 			}
+			
 
 ?>

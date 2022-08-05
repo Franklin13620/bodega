@@ -11,7 +11,7 @@
 			<h4 class="modal-title" id="myModalLabel"><i class='glyphicon glyphicon-edit'></i> Editar producto</h4>
 		  </div>
 		  <div class="modal-body">
-			<form class="form-horizontal" method="post" id="editar_producto" name="editar_producto">
+			<form class="form-horizontal" method="post" id="editar_producto" name="editar_producto" enctype="multipart/form-data">
 			<div id="resultados_ajax2"></div>
 			  <div class="form-group">
 				<label for="mod_codigo" class="col-sm-3 control-label">Código</label>
@@ -24,6 +24,14 @@
 				<label for="mod_nombre" class="col-sm-3 control-label">Nombre</label>
 				<div class="col-sm-8">
 				  <textarea class="form-control" id="mod_nombre" name="mod_nombre" placeholder="Nombre del producto" required></textarea>
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="imagen" class="col-sm-3 control-label">Imagen</label>
+				<div class="col-sm-8">
+					<input type="file" class="form-control" name="file" id="file" accept="image/png, image/jpeg"></input>
+				  
 				</div>
 			  </div>
 			  
