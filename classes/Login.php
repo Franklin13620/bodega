@@ -69,7 +69,7 @@ class Login
 
                 // database query, getting all the info of the selected user (allows login via email address in the
                 // username field)
-                $sql = "SELECT user_id, user_name, firstname, user_email, user_password_hash
+                $sql = "SELECT user_id, user_name, firstname, user_email, user_password_hash, tipo_usuario
                         FROM users
                         WHERE user_name = '" . $user_name . "' OR user_email = '" . $user_name . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
@@ -90,6 +90,7 @@ class Login
 						$_SESSION['user_name'] = $result_row->user_name;
                         $_SESSION['user_email'] = $result_row->user_email;
                         $_SESSION['user_login_status'] = 1;
+                        $_SESSION['tipo_usuario'] =  $result_row->tipo_usuario;
 
                     } else {
                         $this->errors[] = "Usuario y/o contraseña no coinciden.";

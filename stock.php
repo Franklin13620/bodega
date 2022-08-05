@@ -27,7 +27,17 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
+				<?php 
+				if ($_SESSION['tipo_usuario'] == "Admin") { ?>
 				<button type='button' class="btn btn-success" data-toggle="modal" data-target="#nuevoProducto"><span class="glyphicon glyphicon-plus" ></span> Agregar</button>
+				<?php 
+				}else{ ?>
+				<button type='button' class="btn btn-success" disabled><span class="glyphicon glyphicon-plus" ></span> Agregar</button>
+				<?php 
+				}
+				?>
+
+
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Consultar inventario</h4>
 		</div>

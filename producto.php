@@ -114,12 +114,18 @@ if (isset($_GET['id'])){
 					echo "img/stock.png";
 				} ?>"
 				 
-				  alt=""> <!--imagen url -->
+				  alt=""> 
 
 				  <br>
+				<?php 
+					if($_SESSION['tipo_usuario'] == "Admin"){?>
                     <a href="#" class="btn btn-danger" onclick="eliminar('<?php echo $row['id_producto'];?>')" title="Eliminar"> <i class="glyphicon glyphicon-trash"></i> Eliminar </a> 
 					<a href="#myModal2" data-toggle="modal" data-codigo='<?php echo $row['codigo_producto'];?>' data-nombre='<?php echo $row['nombre_producto'];?>' data-categoria='<?php echo $row['id_categoria']?>' data-precio='<?php echo $row['precio_producto']?>' data-stock='<?php echo $row['stock'];?>' data-id='<?php echo $row['id_producto'];?>' class="btn btn-info" title="Editar"> <i class="glyphicon glyphicon-pencil"></i> Editar </a>	
-	
+				<?php 
+					}else{?>
+                    <a class="btn btn-danger" title="Eliminar" disabled><i class="glyphicon glyphicon-trash"></i> Eliminar </a> 
+					<a class="btn btn-info" title="Editar" disabled><i class="glyphicon glyphicon-pencil"></i> Editar </a>	
+					<?php } ?>
 					
               </div>
 			  

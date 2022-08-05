@@ -27,7 +27,11 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
+				<?php if ($_SESSION['tipo_usuario'] == "Admin"){?>
 				<button type='button' class="btn btn-success" data-toggle="modal" data-target="#nuevoCliente"><span class="glyphicon glyphicon-plus" ></span> Nueva Categoría</button>
+				<?php }else{ ?>
+				<button type='button' class="btn btn-success" disabled><span class="glyphicon glyphicon-plus"></span> Nueva Categoría</button>
+				<?php }?>
 			</div>
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Categorías</h4>
 		</div>

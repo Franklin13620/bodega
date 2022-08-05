@@ -21,7 +21,13 @@
         <li class="<?php if (isset($active_productos)){echo $active_productos;}?>"><a href="stock.php"><i class='glyphicon glyphicon-barcode'></i> &nbspInventario</a></li>
 		<li class="<?php if (isset($active_categoria)){echo $active_categoria;}?>"><a href="categorias.php"><i class='glyphicon glyphicon-tags'></i> &nbspCategorias</a></li>
 		<li class="<?php if (isset($active_reporte)){echo $active_reporte;}?>"><a href="reporte.php"><i  class='glyphicon glyphicon-book'></i> &nbspReportes</a></li>
+    <?php 
+    if ($_SESSION['tipo_usuario'] == "Admin"){ ?>
 		<li class="<?php if (isset($active_usuarios)){echo $active_usuarios;}?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-user'></i> &nbspUsuarios</a></li>
+    <?php 
+    }else{ ?>
+		<li class="hidden"><a href="#"><i  class='glyphicon glyphicon-user'></i> &nbspUsuarios</a></li>
+    <?php } ?>
        </ul>
       <ul class="nav navbar-nav navbar-right">
 		<li><a href="login.php?logout"><i class='glyphicon glyphicon-off'></i> Salir</a></li>

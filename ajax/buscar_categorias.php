@@ -100,8 +100,15 @@
 						<td><?php echo $date_added;?></td>
 						
 					<td class='text-right'>
+						<?php if ($_SESSION['tipo_usuario'] == "Admin"){?>
 						<a href="#" class='btn btn-default' title='Editar categoría' data-nombre='<?php echo $nombre_categoria;?>' data-descripcion='<?php echo $descripcion_categoria?>' data-id='<?php echo $id_categoria;?>' data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 						<a href="#" class='btn btn-default' title='Borrar categoría' onclick="eliminar('<?php echo $id_categoria; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
+					<?php }else{?>
+						<a class='btn btn-default' title='Editar categoría' disabled><i class="glyphicon glyphicon-edit"></i></a> 
+						<a class='btn btn-default' title='Borrar categoría' disabled><i class="glyphicon glyphicon-trash"></i> </a>
+						<?php }?>
+					
+					
 					</td>
 						
 					</tr>

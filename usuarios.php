@@ -6,10 +6,10 @@
 		exit;
         }
 
-		// if($_SESSION['tipo_usuario'] != 2){
-		// 	header("location: login.php");
-		// exit;
-		// }
+		if($_SESSION['tipo_usuario'] != "Admin"){
+			header("location: index.php");
+		exit;
+		}
 
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
