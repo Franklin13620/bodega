@@ -104,7 +104,6 @@ if (isset($_GET['id'])){
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-4 col-sm-offset-2 text-center">
-				 
 				 <img class="item-img img-responsive" src="
 				 <?php
 				$path =  'img/productos'.$row['imagen_producto']; 
@@ -115,7 +114,6 @@ if (isset($_GET['id'])){
 				} ?>"
 				 
 				  alt=""> 
-
 				  <br>
 				<?php 
 					if($_SESSION['tipo_usuario'] == "Admin"){?>
