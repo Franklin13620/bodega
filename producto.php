@@ -261,7 +261,7 @@ if (isset($_GET['id'])){
 $( "#editar_producto" ).submit(function( event ) {
   $('#actualizar_datos').attr("disabled", true);
   
-var parametros = $(this).serialize();
+//var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
 			url: "ajax/editar_producto.php",
@@ -276,11 +276,13 @@ var parametros = $(this).serialize();
 			success: function(datos){
 			$("#resultados_ajax2").html(datos);
 			$('#actualizar_datos').attr("disabled", false);
+			// load(1);
 			window.setTimeout(function() {
 				$(".alert").fadeTo(500, 0).slideUp(500, function(){
 				$(this).remove();});
-				location.replace('stock.php');
-			}, 4000);
+				location.replace('http://bodega.hpl/producto.php?id=<?php echo $_GET['id'];?>');
+			}, 500);
+	
 		  }
 	});
   event.preventDefault();
@@ -294,6 +296,7 @@ $('#myModal2').on('show.bs.modal', function (event) {
 		var precio = button.data('precio')
 		var stock = button.data('stock')
 		var id = button.data('id')
+		// imagen edit pendiente->
 		var modal = $(this)
 		modal.find('.modal-body #mod_codigo').val(codigo)
 		modal.find('.modal-body #mod_nombre').val(nombre)

@@ -22,7 +22,7 @@
                         <label for="reference" class="col-sm-2 control-label">Codigo</label>
                         <div class="col-sm-6">
                             <input type="number" name="reference_remove" class="form-control" id="reference_remove"
-                                value="<?php echo $row['codigo_producto'];?>" placeholder="Referencia">
+                                value="<?php echo $row['codigo_producto'];?>" placeholder="Referencia" readonly>
                         </div>
                     </div>
 
