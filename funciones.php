@@ -15,10 +15,10 @@ function guardar_producto($id_producto,$user_id,$fecha,$nota,$reference,$quantit
 	
 	
 }
-function guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo){
+function guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$motivo){
 	global $con;
-	$sql="INSERT INTO historial (id_historial, id_producto, user_id, fecha, nota, referencia, cantidad, tipo)
-	VALUES (NULL, '$id_producto', '$user_id', '$fecha', '$nota', '$reference', '$quantity','$tipo');";
+	$sql="INSERT INTO historial (id_historial, id_producto, user_id, fecha, nota, referencia, cantidad, tipo, motivo)
+	VALUES (NULL, '$id_producto', '$user_id', '$fecha', '$nota', '$reference', '$quantity','$tipo','$motivo');";
 	$query=mysqli_query($con,$sql);
 	
 	

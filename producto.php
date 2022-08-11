@@ -36,7 +36,8 @@
 		$firstname=$_SESSION['firstname'];
 		$nota="$firstname agrego $quantity producto(s) al inventario";
 		$fecha=date("Y-m-d H:i:s"); // Segundos: H:i:s
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo);
+		$motivo = 0;
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo, $motivo);
 		
 		$update=agregar_stock($id_producto,$quantity);
 		if ($update==1){
@@ -45,12 +46,13 @@
 			$error=1;
 		}
 	}
-	if (isset($_POST['reference_remove']) && isset($_POST['quantity_remove'])){
+	if (isset($_POST['reference_remove']) && isset($_POST['quantity_remove']) && isset($_POST['motivo'])){
 		// Validad stock inventario
 		if ($row['stock']<=0) {
 		$errorInventario = 1;
 		}else{
 		$tipo=1;
+		$motivo = $_POST['motivo'];
 		$quantity=intval($_POST['quantity_remove']);
 		$entrada_producto= 0;
 		$salida_producto=$quantity;
@@ -61,7 +63,7 @@
 		$nota="$firstname descargo $quantity producto(s) del inventario";
 		$fecha=date("Y-m-d H:i:s");
 
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo);
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$motivo);
 		
 		$update=eliminar_stock($id_producto,$quantity);
 		if ($update==1){
@@ -201,14 +203,15 @@ if (isset($_GET['id'])){
 					?>	
 					 <table class='table table-bordered'>
 						<tr>
-							<th class='text-center' colspan=5 >HISTORIAL DE INVENTARIO</th>
+							<th class='text-center' colspan=7 >HISTORIAL DE INVENTARIO BODEGA</th>
 						</tr>
 						<tr>
-							<td>Fecha</td>
-							<td>Categoria</td>
-							<td>Descripción</td>
-							<td>Codigo</td>
-							<td>Tipo</td>	
+							<td class='text-center'>Fecha</td>
+							<td class='text-center'>Categoria</td>
+							<td class='text-center'>Descripción</td>
+							<td class='text-center'>Motivo</td>
+							<td class='text-center'>Codigo</td>
+							<td class='text-center'>Tipo</td>	
 							<td class='text-center'>Total</td>
 						</tr>
 						<?php
@@ -218,22 +221,28 @@ if (isset($_GET['id'])){
 							INNER JOIN historial
 							ON products.id_producto = historial.id_producto WHERE historial.id_producto='$id_producto'");
 							while ($row=mysqli_fetch_array($query)){
-								?>
+						?>
 						<tr>
-							<td><?php echo date('d/m/Y', strtotime($row['fecha']));?></td>
+							<td class='text-center'><?php echo date('d/m/Y', strtotime($row['fecha']));?></td>
 							<!-- <td>//echo date('H:i:s', strtotime($row['fecha']));?></td> -->
-							<td><?php echo $row['nombre_categoria'];?></td>
+							<td class='text-center'><?php echo $row['nombre_categoria'];?></td>
 							<td><?php echo $row['nota'];?></td>
-							<td><?php echo $row['referencia'];?></td>
-							<td>
-								<?php 
-								if ($row['tipo']<=0){
-									echo "Carga";
-								}else{
-									echo "Descargo";
-								}
-								?>
-							</td>							
+							<?php 
+							if ($row['motivo'] == 0){
+								$motivo = "---";
+							}elseif($row['motivo'] == 1){
+								$motivo = "Uso";
+							}elseif($row['motivo'] == 2){
+								$motivo = "Dañado";
+							}elseif($row['motivo'] == 3){
+								$motivo = "Devolucion";
+							}else{
+								$motivo = "Desconocido";
+							}
+							?>
+							<td class='text-center'><?php echo $motivo;?></td>
+							<td class='text-center'><?php echo $row['referencia'];?></td>
+							<td class='text-center'><?php if ($row['tipo']<=0){echo "Carga";}else{echo "Descargo";}?></td>							
 							<td class='text-center'><?php echo number_format($row['cantidad'],2);?></td>
 						</tr>		
 								<?php
