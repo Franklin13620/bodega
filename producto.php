@@ -48,8 +48,11 @@
 	}
 	if (isset($_POST['reference_remove']) && isset($_POST['quantity_remove']) && isset($_POST['motivo'])){
 		// Validad stock inventario
-		if ($row['stock']<=0) {
-		$errorInventario = 1;
+		if ($row['stock'] <= 0){
+			$errorInventario = 1;
+		}else{
+		if ($_POST['quantity_remove'] > $row['stock']) {
+		$errorInventarioMenorAlDescargo = 1;
 		}else{
 		$tipo=1;
 		$motivo = $_POST['motivo'];
@@ -72,6 +75,7 @@
 			$error=1;
 		}
 	}
+}
 }
 if (isset($_GET['id'])){
 	$id_producto=intval($_GET['id']);
@@ -197,6 +201,14 @@ if (isset($_GET['id'])){
 						<div class="alert alert-danger alert-dismissible" role="alert">
 						  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						  <strong>Error!</strong> No hay existencias.
+						</div>	
+							<?php
+						}
+						if (isset($errorInventarioMenorAlDescargo)){
+							?>
+						<div class="alert alert-danger alert-dismissible" role="alert">
+						  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  <strong>Error!</strong> No se puede descargar un numero mayor a la cantidad existente.
 						</div>	
 							<?php
 						}
