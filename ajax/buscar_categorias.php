@@ -79,10 +79,10 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="success">
-					<th>Nombre</th>
-					<th>Descripción</th>
-					<th>Agregado</th>
-					<th class='text-right'>Acciones</th>
+					<th class='text-center'>Nombre</th>
+					<th class='text-center'>Descripción</th>
+					<th class='text-center'>Agregado</th>
+					<th class='text-center'>Acciones</th>
 					
 				</tr>
 				<?php
@@ -95,11 +95,11 @@
 					?>
 					<tr>
 						
-						<td><?php echo $nombre_categoria; ?></td>
-						<td ><?php echo $descripcion_categoria; ?></td>
-						<td><?php echo $date_added;?></td>
+						<td class='text-center'><?php echo $nombre_categoria; ?></td>
+						<td class='text-center'><?php echo $descripcion_categoria; ?></td>
+						<td class='text-center'><?php echo $date_added;?></td>
 						
-					<td class='text-right'>
+					<td class='text-center'>
 						<?php if ($_SESSION['tipo_usuario'] == "Admin"){?>
 						<a href="#" class='btn btn-default' title='Editar categoría' data-nombre='<?php echo $nombre_categoria;?>' data-descripcion='<?php echo $descripcion_categoria?>' data-id='<?php echo $id_categoria;?>' data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 						<a href="#" class='btn btn-default' title='Borrar categoría' onclick="eliminar('<?php echo $id_categoria; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
