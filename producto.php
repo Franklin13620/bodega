@@ -25,7 +25,7 @@
 		die("Producto no existe");
 	}
 	
-	if (isset($_POST['reference']) and isset($_POST['quantity'])){
+	if (isset($_POST['reference']) && isset($_POST['quantity'])){
 		$tipo=0;
 		$quantity=intval($_POST['quantity']);
 		$entrada_producto=$quantity;
@@ -47,7 +47,7 @@
 		}
 	}
 	if (isset($_POST['reference_remove']) && isset($_POST['quantity_remove']) && isset($_POST['motivo'])){
-		// Validad stock inventario
+		// Validar stock inventario
 		if ($row['stock'] <= 0){
 			$errorInventario = 1;
 		}else{

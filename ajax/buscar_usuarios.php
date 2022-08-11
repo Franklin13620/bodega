@@ -78,13 +78,13 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="success">
-					<th>ID</th>
-					<th>Nombres</th>
-					<th>Usuario</th>
-					<th>Email</th>
-					<th>Agregado</th>
-					<th>Tipo</th>
-					<th><span class="pull-right">Acciones</span></th>
+					<th class='text-center'>ID</th>
+					<th class='text-center'>Nombres</th>
+					<th class='text-center'>Usuario</th>
+					<th class='text-center'>Email</th>
+					<th class='text-center'>Agregado</th>
+					<th class='text-center'>Tipo</th>
+					<th class='text-center'>Acciones</th>
 					
 				</tr>
 				<?php
@@ -106,18 +106,18 @@
 					
 				
 					<tr>
-						<td><?php echo $user_id; ?></td>
-						<td><?php echo $fullname; ?></td>
-						<td ><?php echo $user_name; ?></td>
-						<td ><?php echo $user_email; ?></td>
-						<td><?php echo $date_added;?></td>
+						<td class='text-center'><?php echo $user_id; ?></td>
+						<td class='text-center'><?php echo $fullname; ?></td>
+						<td class='text-center'><?php echo $user_name; ?></td>
+						<td class='text-center'><?php echo $user_email; ?></td>
+						<td class='text-center'><?php echo $date_added;?></td>
 
-						<td><?php if($tipo_usuario == "Admin") {echo $tipo_usuario; }elseif ($tipo_usuario == "Personal"){echo $tipo_usuario;}else{echo "Desconocido";}?></td>	
+						<td class='text-center'><?php if($tipo_usuario == "Admin") {echo $tipo_usuario; }elseif ($tipo_usuario == "Personal"){echo $tipo_usuario;}else{echo "Desconocido";}?></td>	
 
-					<td ><span class="pull-right">
+					<td class='text-center'>
 					<a href="#" class='btn btn-default' title='Editar usuario' onclick="obtener_datos('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal2"><i class="glyphicon glyphicon-edit"></i></a> 
 					<a href="#" class='btn btn-default' title='Cambiar contraseña' onclick="get_user_id('<?php echo $user_id;?>');" data-toggle="modal" data-target="#myModal3"><i class="glyphicon glyphicon-cog"></i></a>
-					<a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminar('<?php echo $user_id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+					<a href="#" class='btn btn-default' title='Borrar usuario' onclick="eliminar('<?php echo $user_id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></td>
 						
 					</tr>
 					<?php
