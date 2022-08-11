@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2022 at 10:30 PM
+-- Generation Time: Aug 11, 2022 at 04:30 PM
 -- Server version: 10.5.15-MariaDB-0+deb11u1
 -- PHP Version: 7.4.30
 
@@ -39,8 +39,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`, `descripcion_categoria`, `date_added`) VALUES
-(30, 'Herramientas', '', '2022-08-02'),
-(31, 'Material', '', '2022-08-02');
+(30, 'Herramientas', 'Herramienta para uso del hospital', '2022-08-02'),
+(31, 'Material', 'Material utilizado', '2022-08-02');
 
 -- --------------------------------------------------------
 
@@ -56,24 +56,33 @@ CREATE TABLE `historial` (
   `nota` varchar(255) NOT NULL,
   `referencia` varchar(100) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `tipo` varchar(1) DEFAULT NULL COMMENT '0- Add, 1- Descargo'
+  `tipo` varchar(1) DEFAULT NULL COMMENT '0- Add, 1- Descargo',
+  `motivo` int(11) DEFAULT NULL COMMENT '1- Uso, 2- Danado, 3- Devolucion'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `historial`
 --
 
-INSERT INTO `historial` (`id_historial`, `id_producto`, `user_id`, `fecha`, `nota`, `referencia`, `cantidad`, `tipo`) VALUES
-(192, 80, 1, '2022-08-02', 'Franklin agrego 2 producto(s) al inventario', '1', 2, '0'),
-(193, 81, 1, '2022-08-02', 'Franklin agrego 100 producto(s) al inventario', '312', 100, '0'),
-(194, 80, 1, '2022-08-03', 'Franklin descargo 1 producto(s) del inventario', '072517', 1, '1'),
-(195, 80, 1, '2022-08-03', 'Franklin agrego 1 producto(s) al inventario', '072517', 1, '0'),
-(196, 80, 1, '2022-08-03', 'Franklin descargo 1 producto(s) del inventario', '072517', 1, '1'),
-(197, 80, 1, '2022-08-03', 'Franklin descargo 1 producto(s) del inventario', '072517', 1, '1'),
-(198, 80, 1, '2022-08-03', 'Franklin agrego 1 producto(s) al inventario', '072517', 1, '0'),
-(199, 80, 1, '2022-08-03', 'Franklin descargo 1 producto(s) del inventario', '072517', 1, '1'),
-(200, 80, 1, '2022-08-03', 'Franklin agrego 2 producto(s) al inventario', '072517', 2, '0'),
-(201, 81, 1, '2022-08-04', 'Franklin descargo 1 producto(s) del inventario', '312', 1, '1');
+INSERT INTO `historial` (`id_historial`, `id_producto`, `user_id`, `fecha`, `nota`, `referencia`, `cantidad`, `tipo`, `motivo`) VALUES
+(205, 83, 1, '2022-08-10', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 2),
+(206, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(207, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(208, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(209, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
+(210, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(211, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 3),
+(212, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(213, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(214, 83, 1, '2022-08-11', 'Franklin descargo 8 producto(s) del inventario', '121', 8, '1', 1),
+(215, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(216, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(217, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
+(218, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(219, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
+(220, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
+(221, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
+(222, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0);
 
 -- --------------------------------------------------------
 
@@ -99,8 +108,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `date_added`, `precio_producto`, `stock`, `id_categoria`, `entrada_producto`, `salida_producto`, `imagen_producto`) VALUES
-(80, '072517', 'TALADRO', '2022-08-02', 90, 2, 30, 6, 4, '/02-08-22-14-24-34-taladro.jpg'),
-(81, '312', 'TORNILLOS', '2022-08-02', 0.3, 99, 31, 100, 1, '/02-08-22-14-41-52-tornillos.jpg');
+(83, '121', 'Taladro', '2022-08-10', 1, 1, 30, 15, 14, '/10-08-22-15-55-03-');
 
 -- --------------------------------------------------------
 
@@ -173,13 +181,13 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `users`
