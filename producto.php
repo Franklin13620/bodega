@@ -136,13 +136,13 @@ if (isset($_GET['id'])){
               <div class="col-sm-4 text-left">
                 <div class="row margin-btm-20">
                     <div class="col-sm-12">
-                      <span class="item-title"> <?php echo $row['nombre_producto'];?></span>
+                      <span class="item-title"> <?php echo $row['codigo_producto'];?></span>
                     </div>
 					<div class="col-sm-12">
-                      <span class="current-stock"> Codigo </span>
+                      <span class="current-stock"> Nombre </span>
                     </div>
                     <div class="col-sm-12 margin-btm-10">
-                      <span class="item-quantity"><?php echo $row['codigo_producto'];?></span>
+                      <span class="item-quantity"><?php echo $row['nombre_producto'];?></span>
                     </div>
                     <div class="col-sm-12 margin-btm-10">
                     </div>
@@ -263,7 +263,7 @@ if (isset($_GET['id'])){
 					 </table>
                   </div>
                                     
-                                    
+                	<!-- PAGINACION PENDIENTE  -->
 				</div>
             </div>
           </div>
