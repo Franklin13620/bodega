@@ -20,8 +20,17 @@
       <ul class="nav navbar-nav">
         <li class="<?php if (isset($active_productos)){echo $active_productos;}?>"><a href="stock.php"><i class='glyphicon glyphicon-barcode'></i> &nbspInventario</a></li>
 		<li class="<?php if (isset($active_categoria)){echo $active_categoria;}?>"><a href="categorias.php"><i class='glyphicon glyphicon-tags'></i> &nbspCategorias</a></li>
-		<li class="<?php if (isset($active_reporte)){echo $active_reporte;}?>"><a href="reporte.php"><i  class='glyphicon glyphicon-book'></i> &nbspReportes</a></li>
-    <?php 
+		<!-- <li class="<?php //if (isset($active_reporte)){echo $active_reporte;}?>"><a href="reporte.php"><i  class='glyphicon glyphicon-book'></i> &nbspReportes</a></li> -->
+   <li class="<?php if (isset($active_reporte)){echo $active_reporte;}?>">
+    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='glyphicon glyphicon-book'></i>  Reporte
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="reporte.php">Reporte de Inventario</a></li>
+      <li><a href="reporte_producto.php">Reporte por Producto</a></li>
+    </ul>
+   </li>
+   <?php 
     if ($_SESSION['tipo_usuario'] == "Admin"){ ?>
 		<li class="<?php if (isset($active_usuarios)){echo $active_usuarios;}?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-user'></i> &nbspUsuarios</a></li>
     <?php 
