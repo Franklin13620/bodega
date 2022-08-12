@@ -248,6 +248,8 @@ if (isset($_GET['id'])){
 								$motivo = "Dañado";
 							}elseif($row['motivo'] == 3){
 								$motivo = "Devolucion";
+							}elseif($row['motivo'] == 4){
+								$motivo = "Inv Inicial";
 							}else{
 								$motivo = "Desconocido";
 							}

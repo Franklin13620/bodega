@@ -53,7 +53,7 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 				$firstname=$_SESSION['firstname'];
 				$nota="$firstname agrego $stock producto(s) al inventario";
 				$tipo = 0;
-				$motivo = 0;
+				$motivo = 4;
 
 				guardar_historial($id_producto,$user_id,$date_added,$nota,$codigo,$stock,$tipo,$motivo);
 				
