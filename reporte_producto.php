@@ -40,36 +40,16 @@
                             <input type="text" class="form-control" name="nombre_producto" required>
                         </div>
 
-                        <!-- Busqueda categoria esta 100% -->
                         <div class='col-md-3'>
-                            <label>Categoria</label>
-                            <select class='form-control' name='categoria' id='categoria'>
-                                <option value="nada" selected>Selecciona una categoria</option>
-                                <?php 
-							$query_categoria=mysqli_query($con,"select * from categorias order by nombre_categoria");
-							while($rw=mysqli_fetch_array($query_categoria))	{
-								?>
-                                <option value="<?php echo $rw['nombre_categoria'];?>">
-                                    <?php echo $rw['nombre_categoria'];?></option>
-                                <?php
-							}
-							?>
-                            </select>
-                        </div>
-
-                        <div class='col-md-2'>
                             <label>Desde</label>
                             <input type="date" class="form-control" name="desde" value="<?php echo date("Y-m-01"); ?>"
                                 required>
                         </div>
-                        <div class='col-md-2'>
+                        <div class='col-md-3'>
                             <label>Hasta</label>
                             <input type="date" class="form-control" name="hasta" value=<?php echo date("Y-m-d"); ?>
                                 required>
                         </div>
-
-
-
                     </div>
                     <hr>
                     <div class='row-fluid'>

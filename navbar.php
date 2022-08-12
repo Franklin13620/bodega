@@ -22,7 +22,7 @@
 		<li class="<?php if (isset($active_categoria)){echo $active_categoria;}?>"><a href="categorias.php"><i class='glyphicon glyphicon-tags'></i> &nbspCategorias</a></li>
 		<!-- <li class="<?php //if (isset($active_reporte)){echo $active_reporte;}?>"><a href="reporte.php"><i  class='glyphicon glyphicon-book'></i> &nbspReportes</a></li> -->
    <li class="<?php if (isset($active_reporte)){echo $active_reporte;}?>">
-    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='glyphicon glyphicon-book'></i>  Reporte
+    <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='glyphicon glyphicon-book'></i> &nbspReporte
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">

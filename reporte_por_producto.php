@@ -7,7 +7,6 @@
     if(isset($_GET['nombre_producto']) && isset($_GET['desde']) && isset($_GET['hasta'])) {
         $desde = $_GET["desde"];
         $hasta = $_GET["hasta"];
-        $categoria = $_GET['categoria'];
         $nombre_producto = $_GET['nombre_producto'];      
     }else{
         header("location: error.php");
@@ -46,15 +45,11 @@ class PDF extends FPDF{
         $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
     }
 }
-    if($categoria=="nada"){
-        $query ="SELECT * FROM products 
-        INNER JOIN categorias 
-        ON products.id_categoria = categorias.id_categoria WHERE nombre_producto = '$nombre_producto' AND products.date_added BETWEEN '$desde' AND '$hasta'";
-    } else {
-        $query ="SELECT * FROM categorias 
-        INNER JOIN products 
-        ON categorias.id_categoria = products.id_categoria WHERE nombre_producto = '$nombre_producto' AND products.date_added BETWEEN '$desde' AND '$hasta' AND nombre_categoria='$categoria'";
-    }
+
+    $query ="SELECT * FROM products 
+    INNER JOIN categorias 
+    ON products.id_categoria = categorias.id_categoria WHERE nombre_producto = '$nombre_producto' AND products.date_added BETWEEN '$desde' AND '$hasta'";
+
     $query2 = "SELECT * FROM products";
     $resultado = $con->query($query);
     // Instancia 
