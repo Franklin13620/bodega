@@ -69,17 +69,21 @@ class PDF extends FPDF{
     $total_existencias=0;
     $contador_totales = 0;
 
+
     // Recorrido
     while($row = $resultado->fetch_assoc()){
         $precio = $row['precio_producto'];
         $stock = $row['stock'];
         $entrada_producto = $row['entrada_producto'];
         $salida_producto = $row['salida_producto'];
+        
         $pdf->Cell(20,10, $row['codigo_producto'],1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_producto'],1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_categoria'],1, 0,'C', 0);
-        $pdf->Cell(20,10, number_format($entrada_producto, 0),1, 0,'C', 0);
-        $pdf->Cell(20,10, number_format($salida_producto, 0),1, 0,'C', 0);
+        $entrada_producto == 0 ? $entrada_producto = "---" : $entrada_producto = number_format($entrada_producto, 0);
+        $pdf->Cell(20,10, $entrada_producto,1, 0,'C', 0);
+        $salida_producto == 0 ? $salida_producto = "---" : $salida_producto = number_format($salida_producto, 0);
+        $pdf->Cell(20,10, $salida_producto,1, 0,'C', 0);
         $pdf->Cell(20,10, "$ " . number_format($precio, 2) ,1, 0,'C', 0);
         $pdf->Cell(20,10, number_format($stock, 0),1, 0,'C', 0);
         // operaciones
