@@ -31,8 +31,8 @@ class PDF extends FPDF{
         $this->Cell(20,10, "Entrada",1, 0,'C', 0);
         $this->Cell(20,10, "Salida",1, 0,'C', 0);
         $this->Cell(20,10, "Precio",1, 0,'C', 0);
-        $this->Cell(30,10, "Existencias",1, 0,'C', 0);
-        $this->Cell(20,10, "Total",1, 1,'C', 0);
+        $this->Cell(20,10, "Exist",1, 0,'C', 0);
+        $this->Cell(30,10, "Total",1, 1,'C', 0);
 
     }
     function Footer()
@@ -78,10 +78,10 @@ class PDF extends FPDF{
         $pdf->Cell(20,10, $row['codigo_producto'],1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_producto'],1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_categoria'],1, 0,'C', 0);
-        $pdf->Cell(20,10, $entrada_producto,1, 0,'C', 0);
-        $pdf->Cell(20,10, $salida_producto,1, 0,'C', 0);
-        $pdf->Cell(20,10, "$ $precio" ,1, 0,'C', 0);
-        $pdf->Cell(30,10, $stock,1, 0,'C', 0);
+        $pdf->Cell(20,10, number_format($entrada_producto, 0),1, 0,'C', 0);
+        $pdf->Cell(20,10, number_format($salida_producto, 0),1, 0,'C', 0);
+        $pdf->Cell(20,10, "$ " . number_format($precio, 2) ,1, 0,'C', 0);
+        $pdf->Cell(20,10, number_format($stock, 0),1, 0,'C', 0);
         // operaciones
         $total_entrada_producto = $total_entrada_producto + $entrada_producto;
         $total_salida_producto = $total_salida_producto + $salida_producto;
@@ -89,14 +89,14 @@ class PDF extends FPDF{
         $total_precio = $total_precio + $precio;
         $total = $precio*$stock;
         $contador_totales = $contador_totales + $total;
-        $pdf->Cell(20,10, "$ $total",1, 1,'C', 0); 
+        $pdf->Cell(30,10, "$ " . number_format($total, 2),1, 1,'C', 0); 
     }
 
     $pdf->Cell(80,10, "TOTAL",1, 0,'C', 0);
-    $pdf->Cell(20,10, $total_entrada_producto,1, 0,'C', 0);
-    $pdf->Cell(20,10, $total_salida_producto,1, 0,'C', 0);
-    $pdf->Cell(20,10, "$ $total_precio",1, 0,'C', 0);
-    $pdf->Cell(30,10, $total_existencias,1, 0,'C', 0);
-    $pdf->Cell(20,10, "$ $contador_totales" ,1, 1,'C', 0);
+    $pdf->Cell(20,10, number_format($total_entrada_producto, 0),1, 0,'C', 0);
+    $pdf->Cell(20,10, number_format($total_salida_producto, 0),1, 0,'C', 0);
+    $pdf->Cell(20,10, "$ " . number_format($total_precio, 2),1, 0,'C', 0);
+    $pdf->Cell(20,10, number_format($total_existencias, 0),1, 0,'C', 0);
+    $pdf->Cell(30,10, "$ ". number_format($contador_totales, 2) ,1, 1,'C', 0);
     $pdf->Output();
 ?>

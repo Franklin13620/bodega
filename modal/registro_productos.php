@@ -16,7 +16,7 @@
 			  <div class="form-group">
 				<label for="codigo" class="col-sm-3 control-label">Código</label>
 				<div class="col-sm-8">
-				  <input type="number" class="form-control" id="codigo" name="codigo" placeholder="Código del producto" required>
+				  <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código del producto" required>
 				</div>
 			  </div>
 			  
