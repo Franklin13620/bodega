@@ -4,14 +4,14 @@
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 	require_once('fpdf/fpdf.php');
 
-    if(!isset($_GET['desde']) AND !isset($_GET['hasta'])) {
+    if(isset($_GET['desde']) && isset($_GET['hasta'])) {
+        $desde = $_GET["desde"];
+        $hasta = $_GET["hasta"];
+        $categoria = $_GET['categoria'];      
+    }else{
         header("location: error.php");
-		exit;
+        // echo "<script languaje='javascript' type='text/javascript'>window.close();</script>";
     }
-   $desde = $_GET["desde"];
-   $hasta = $_GET["hasta"];
-   $categoria = $_GET['categoria'];
-    //fecha pendiente
 
 class PDF extends FPDF{
     function Header()
@@ -40,7 +40,7 @@ class PDF extends FPDF{
         $desdee=$GLOBALS['desde'];
         $hastaa=$GLOBALS['hasta'];
         $this->SetY(-15);
-        $this->Cell(20,18, utf8_decode("Reporte de inventario del $desdee al $hastaa Espanil"));
+        $this->Cell(20,18, utf8_decode("Reporte de inventario del $desdee al $hastaa"));
         $this->SetFont('Arial','I',8);
         $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
     }
