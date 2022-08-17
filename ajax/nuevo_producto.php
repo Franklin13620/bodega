@@ -31,7 +31,7 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 		$stock=intval($_POST['stock']);
 		$id_categoria=intval($_POST['categoria']);
 		$precio_venta=floatval($_POST['precio']);
-		$date_added=date("Y-m-d H:i:s");
+		$date_added=date("Y-m-d");
 		$entrada_producto = $stock;
 		$salida_producto = 0;
 		// img
@@ -54,6 +54,7 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 				$nota="$firstname agrego $stock producto(s) al inventario";
 				$tipo = 0;
 				$motivo = 4;
+				$hora = date("H:i:s");
 
 				guardar_historial($id_producto,$user_id,$date_added,$nota,$codigo,$stock,$tipo,$motivo,$hora);
 				
