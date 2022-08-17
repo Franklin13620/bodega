@@ -79,6 +79,7 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="success">
+					<th class='text-center'>ID</th>
 					<th class='text-center'>Nombre</th>
 					<th class='text-center'>Descripción</th>
 					<th class='text-center'>Agregado</th>
@@ -94,7 +95,7 @@
 						
 					?>
 					<tr>
-						
+						<td class='text-center'><?php echo $id_categoria; ?></td>
 						<td class='text-center'><?php echo $nombre_categoria; ?></td>
 						<td class='text-center'><?php echo $descripcion_categoria; ?></td>
 						<td class='text-center'><?php echo $date_added;?></td>
