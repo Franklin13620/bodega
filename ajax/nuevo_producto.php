@@ -55,7 +55,7 @@ include('is_logged.php');//Archivo verifica que el usario que intenta acceder a 
 				$tipo = 0;
 				$motivo = 4;
 
-				guardar_historial($id_producto,$user_id,$date_added,$nota,$codigo,$stock,$tipo,$motivo);
+				guardar_historial($id_producto,$user_id,$date_added,$nota,$codigo,$stock,$tipo,$motivo,$hora);
 				
 			} else{
 				$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
