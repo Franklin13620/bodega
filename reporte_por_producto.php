@@ -63,11 +63,11 @@ class PDF extends FPDF{
     // Recorrido
     while($row = $resultado->fetch_assoc()){
         $precio = $row['precio_producto'];
-        $stock = $row['stock'];
         $tipo = $row['tipo'];
         $cantidad = $row['cantidad'];
+        $fecha = $row['fecha'] . " " . $row['hora'];
 
-        $pdf->Cell(45,10, $row['fecha'],1, 0,'C', 0);
+        $pdf->Cell(45,10, $fecha,1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_producto'],1, 0,'C', 0);
         $tipo == 0 ? $tipo = "CARGA" : $tipo = "Descargo";
         $pdf->Cell(25,10, $tipo, 1, 0,'C', 0);

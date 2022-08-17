@@ -35,9 +35,10 @@
 		$user_id=$_SESSION['user_id'];
 		$firstname=$_SESSION['firstname'];
 		$nota="$firstname agrego $quantity producto(s) al inventario";
-		$fecha=date("Y-m-d H:i:s"); // Segundos: H:i:s
+		$fecha=date("Y-m-d"); 
+		$hora = date("H:i:s");// Segundos: H:i:s
 		$motivo = 0;
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo, $motivo);
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo, $motivo, $hora);
 		
 		$update=agregar_stock($id_producto,$quantity);
 		if ($update==1){
@@ -64,9 +65,10 @@
 		$user_id=$_SESSION['user_id'];
 		$firstname=$_SESSION['firstname'];
 		$nota="$firstname descargo $quantity producto(s) del inventario";
-		$fecha=date("Y-m-d H:i:s");
+		$fecha=date("Y-m-d");
+		$hora = date("H:i:s");// Segundos: H:i:s
 
-		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$motivo);
+		guardar_historial($id_producto,$user_id,$fecha,$nota,$reference,$quantity,$tipo,$motivo, $hora);
 		
 		$update=eliminar_stock($id_producto,$quantity);
 		if ($update==1){
