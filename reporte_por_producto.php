@@ -4,10 +4,11 @@
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 	require_once('fpdf/fpdf.php');
 
-    if(isset($_GET['nombre_producto']) && isset($_GET['desde']) && isset($_GET['hasta'])) {
+    if(isset($_GET['buscar_producto']) && isset($_GET['desde']) && isset($_GET['hasta'])) {
         $desde = $_GET["desde"];
         $hasta = $_GET["hasta"];
-        $nombre_producto = $_GET['nombre_producto'];      
+        $nombre_producto = $_GET['nombre_producto']; 
+        $buscar_producto = $_GET['buscar_producto'];     
     }else{
         header("location: error.php");
         // echo "<script languaje='javascript' type='text/javascript'>window.close();</script>";
@@ -25,14 +26,12 @@ class PDF extends FPDF{
         $this->Cell(70);
         $this->Cell(79,30, utf8_decode('Bodega Mantenimiento'));
         $this->Ln(40);
-        $this->Cell(20,10, "Codigo",1, 0,'C', 0);
+        $this->Cell(45,10, "Fecha",1, 0,'C', 0);
         $this->Cell(30,10, "Producto",1, 0,'C', 0);
-        $this->Cell(30,10, "Categoria",1, 0,'C', 0);
-        $this->Cell(20,10, "Entrada",1, 0,'C', 0);
-        $this->Cell(20,10, "Salida",1, 0,'C', 0);
-        $this->Cell(20,10, "Precio",1, 0,'C', 0);
-        $this->Cell(20,10, "Exist",1, 0,'C', 0);
-        $this->Cell(30,10, "Total",1, 1,'C', 0);
+        $this->Cell(25,10, "Tipo",1, 0,'C', 0);
+        $this->Cell(25,10, "Cantidad",1, 0,'C', 0);
+        $this->Cell(28,10, "Precio",1, 0,'C', 0);
+        $this->Cell(35,10, "Total",1, 1,'C', 0);
 
     }
     function Footer()
@@ -46,11 +45,9 @@ class PDF extends FPDF{
     }
 }
 
-    $query ="SELECT * FROM products 
-    INNER JOIN categorias 
-    ON products.id_categoria = categorias.id_categoria WHERE nombre_producto = '$nombre_producto' AND products.date_added BETWEEN '$desde' AND '$hasta'";
-
-    $query2 = "SELECT * FROM products";
+    $query ="SELECT * FROM historial  
+    INNER JOIN products 
+    ON historial.id_producto = products.id_producto WHERE nombre_producto = '$buscar_producto' AND historial.fecha BETWEEN '$desde' AND '$hasta'";
     $resultado = $con->query($query);
     // Instancia 
     $pdf = new PDF();
@@ -60,43 +57,34 @@ class PDF extends FPDF{
 
     $total=0;
     $total_precio=0;
-    $total_entrada_producto=0;
-    $total_salida_producto=0;
-    $total_existencias=0;
+    $total_cantidad=0;
     $contador_totales = 0;
-
 
     // Recorrido
     while($row = $resultado->fetch_assoc()){
         $precio = $row['precio_producto'];
         $stock = $row['stock'];
-        $entrada_producto = $row['entrada_producto'];
-        $salida_producto = $row['salida_producto'];
-        
-        $pdf->Cell(20,10, $row['codigo_producto'],1, 0,'C', 0);
+        $tipo = $row['tipo'];
+        $cantidad = $row['cantidad'];
+
+        $pdf->Cell(45,10, $row['fecha'],1, 0,'C', 0);
         $pdf->Cell(30,10, $row['nombre_producto'],1, 0,'C', 0);
-        $pdf->Cell(30,10, $row['nombre_categoria'],1, 0,'C', 0);
-        $entrada_producto == 0 ? $entrada_producto = "---" : $entrada_producto = number_format($entrada_producto, 0);
-        $pdf->Cell(20,10, $entrada_producto,1, 0,'C', 0);
-        $salida_producto == 0 ? $salida_producto = "---" : $salida_producto = number_format($salida_producto, 0);
-        $pdf->Cell(20,10, $salida_producto,1, 0,'C', 0);
-        $pdf->Cell(20,10, "$ " . number_format($precio, 2) ,1, 0,'C', 0);
-        $pdf->Cell(20,10, number_format($stock, 0),1, 0,'C', 0);
+        $tipo == 0 ? $tipo = "CARGA" : $tipo = "Descargo";
+        $pdf->Cell(25,10, $tipo, 1, 0,'C', 0);
+        $pdf->Cell(25,10, number_format($cantidad,0),1, 0,'C', 0);
+        $pdf->Cell(28,10, "$ " . number_format($precio, 2) ,1, 0,'C', 0);
+
         // operaciones
-        $total_entrada_producto = $total_entrada_producto + $entrada_producto;
-        $total_salida_producto = $total_salida_producto + $salida_producto;
-        $total_existencias = $total_existencias + $stock;
+        $total_cantidad = $total_cantidad + $cantidad;
         $total_precio = $total_precio + $precio;
-        $total = $precio*$stock;
+        $total = $precio*$cantidad;
         $contador_totales = $contador_totales + $total;
-        $pdf->Cell(30,10, "$ " . number_format($total, 2),1, 1,'C', 0); 
+        $pdf->Cell(35,10, "$ " . number_format($total, 2),1, 1,'C', 0); 
     }
 
-    $pdf->Cell(80,10, "TOTAL",1, 0,'C', 0);
-    $pdf->Cell(20,10, number_format($total_entrada_producto, 0),1, 0,'C', 0);
-    $pdf->Cell(20,10, number_format($total_salida_producto, 0),1, 0,'C', 0);
-    $pdf->Cell(20,10, "$ " . number_format($total_precio, 2),1, 0,'C', 0);
-    $pdf->Cell(20,10, number_format($total_existencias, 0),1, 0,'C', 0);
-    $pdf->Cell(30,10, "$ ". number_format($contador_totales, 2) ,1, 1,'C', 0);
+    $pdf->Cell(100,10, "TOTAL",1, 0,'C', 0);
+    $pdf->Cell(25,10, number_format($total_cantidad, 0),1, 0,'C', 0);
+    $pdf->Cell(28,10, "$ " . number_format($total_precio, 2),1, 0,'C', 0);
+    $pdf->Cell(35,10, "$ ". number_format($contador_totales, 2) ,1, 1,'C', 0);
     $pdf->Output();
 ?>
