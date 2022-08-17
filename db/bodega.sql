@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2022 at 04:30 PM
+-- Generation Time: Aug 17, 2022 at 03:13 PM
 -- Server version: 10.5.15-MariaDB-0+deb11u1
 -- PHP Version: 7.4.30
 
@@ -57,32 +57,9 @@ CREATE TABLE `historial` (
   `referencia` varchar(100) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `tipo` varchar(1) DEFAULT NULL COMMENT '0- Add, 1- Descargo',
-  `motivo` int(11) DEFAULT NULL COMMENT '1- Uso, 2- Danado, 3- Devolucion'
+  `motivo` int(11) DEFAULT NULL COMMENT '1- Uso, 2- Danado, 3- Devolucion, 4- Inventario Inicial',
+  `hora` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `historial`
---
-
-INSERT INTO `historial` (`id_historial`, `id_producto`, `user_id`, `fecha`, `nota`, `referencia`, `cantidad`, `tipo`, `motivo`) VALUES
-(205, 83, 1, '2022-08-10', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 2),
-(206, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(207, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(208, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(209, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
-(210, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(211, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 3),
-(212, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(213, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(214, 83, 1, '2022-08-11', 'Franklin descargo 8 producto(s) del inventario', '121', 8, '1', 1),
-(215, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(216, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(217, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
-(218, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(219, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
-(220, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0),
-(221, 83, 1, '2022-08-11', 'Franklin descargo 1 producto(s) del inventario', '121', 1, '1', 1),
-(222, 83, 1, '2022-08-11', 'Franklin agrego 1 producto(s) al inventario', '121', 1, '0', 0);
 
 -- --------------------------------------------------------
 
@@ -102,13 +79,6 @@ CREATE TABLE `products` (
   `salida_producto` int(50) DEFAULT NULL,
   `imagen_producto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id_producto`, `codigo_producto`, `nombre_producto`, `date_added`, `precio_producto`, `stock`, `id_categoria`, `entrada_producto`, `salida_producto`, `imagen_producto`) VALUES
-(83, '121', 'Taladro', '2022-08-10', 1, 1, 30, 15, 14, '/10-08-22-15-55-03-');
 
 -- --------------------------------------------------------
 
@@ -181,13 +151,13 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `users`
